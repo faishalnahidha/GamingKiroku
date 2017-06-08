@@ -1,0 +1,90 @@
+<resources>
+    <string name="app_name">Gaming Kiroku</string>
+    <string name="action_settings">Settings</string>
+    <string name="label_genre">Genre</string>
+    <string name="label_sub_genre">Sub Genre</string>
+    <string name="label_platform">Platform</string>
+    <string name="label_finished">Finished</string>
+    <string name="button_save">Save</string>
+    <string name="game_title_hint">Game title...</string>
+
+    <string-array name="genre_list">
+        <item>Action</item>
+        <item>Adventure</item>
+        <item>Role-playing</item>
+        <item>Simulation</item>
+        <item>Strategy</item>
+        <item>Casual</item>
+        <item>Online</item>
+    </string-array>
+
+    <string-array name="action_sub_genre">
+        <item>Action-adventure</item>
+        <item>Platformer</item>
+        <item>First-person Shooter</item>
+        <item>Third-person Shooter</item>
+        <item>Fighting</item>
+        <item>Stealth</item>
+        <item>Survival</item>
+        <item>Survival-horror</item>
+    </string-array>
+
+    <string-array name="adventure_sub_genre">
+        <item>Graphic/Text Adventure</item>
+        <item>Visual Novel</item>
+        <item>Interactive Movie</item>
+    </string-array>
+
+    <string-array name="roleplaying_sub_genre">
+        <item>Action-RPG</item>
+        <item>Dungeon Crawl</item>
+        <item>Tactical-RPG</item>
+        <item>Sandbox</item>
+    </string-array>
+
+    <string-array name="simulation_sub_genre">
+        <item>Construction and Management Sim</item>
+        <item>Life Simulation</item>
+        <item>Racing</item>
+        <item>Sport</item>
+        <item>Vehicle Simulation</item>
+    </string-array>
+
+    <string-array name="strategy_sub_genre">
+        <item>4X</item>
+        <item>Real-time Strategy</item>
+        <item>Real-time Tactic</item>
+        <item>Tower Defense</item>
+        <item>Turn-based Tactic</item>
+        <item>Turn-based Strategy</item>
+    </string-array>
+
+    <string-array name="online_sub_genre">
+        <item>MMORPG</item>
+        <item>MOBA</item>
+        <item>MMOFPS</item>
+    </string-array>
+
+    <string-array name="platform_list">
+        <item>3DS</item>
+        <item>NDS</item>
+        <item>Arcade</item>
+        <item>PC</item>
+        <item>PSX</item>
+        <item>PS2</item>
+        <item>PS3</item>
+        <item>PS4</item>
+        <item>PSP</item>
+        <item>PSVita</item>
+        <item>Xbox</item>
+        <item>XBOX360</item>
+        <item>XBOXONE</item>
+        <item>Wii-U</item>
+        <item>Wii</item>
+        <item>Switch</item>
+        <item>GBA</item>
+        <item>NES</item>
+        <item>SNES</item>
+        <item>Dreamcast</item>
+    </string-array>
+</resources>
