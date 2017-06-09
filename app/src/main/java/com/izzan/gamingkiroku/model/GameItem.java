@@ -1,8 +1,11 @@
-package com.izzan.gamingkiroku;
+package com.izzan.gamingkiroku.model;
 
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
+
+import java.util.List;
 
 /**
  * Created by Aizen on 7 Jun 2017.
@@ -27,17 +30,37 @@ public class GameItem extends Model{
     @Column(name = "platform")
     private String platform;
 
+    @Column(name = "finished")
+    private boolean finished;
+
+    @Column(name = "rating")
+    private float rating;
+
     public GameItem() {
         super();
     }
 
-    public GameItem(long gameItemId, String title, String genre, String subGenre, String platform) {
+    public GameItem(long gameItemId, String title, String genre, String subGenre, String platform,
+    boolean finished, float rating) {
         super();
         this.gameItemId = gameItemId;
         this.title = title;
         this.genre = genre;
         this.subGenre = subGenre;
         this.platform = platform;
+        this.finished = finished;
+        this.rating = rating;
+    }
+
+    public GameItem(String title, String genre, String subGenre, String platform,
+                    boolean finished, float rating) {
+        super();
+        this.title = title;
+        this.genre = genre;
+        this.subGenre = subGenre;
+        this.platform = platform;
+        this.finished = finished;
+        this.rating = rating;
     }
 
     public long getGameItemId() {
@@ -78,5 +101,29 @@ public class GameItem extends Model{
 
     public void setPlatform(String platform) {
         this.platform = platform;
+    }
+
+    public boolean isFinished() {
+        return finished;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+
+    public static List<GameItem> getAll() {
+        // This is how you execute a query
+        return new Select()
+                .from(GameItem.class)
+                .orderBy("Name ASC")
+                .execute();
     }
 }

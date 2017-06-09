@@ -11,7 +11,7 @@
     <string-array name="genre_list">
         <item>Action</item>
         <item>Adventure</item>
-        <item>Role-playing</item>
+        <item>Role-playing / RPG</item>
         <item>Simulation</item>
         <item>Strategy</item>
         <item>Casual</item>
@@ -26,11 +26,11 @@
         <item>Fighting</item>
         <item>Stealth</item>
         <item>Survival</item>
-        <item>Survival-horror</item>
+        <item>Survival Horror</item>
     </string-array>
 
     <string-array name="adventure_sub_genre">
-        <item>Graphic/Text Adventure</item>
+        <item>Graphic / Text Adventure</item>
         <item>Visual Novel</item>
         <item>Interactive Movie</item>
     </string-array>
@@ -43,7 +43,7 @@
     </string-array>
 
     <string-array name="simulation_sub_genre">
-        <item>Construction and Management Sim</item>
+        <item>Construction / Management Sim</item>
         <item>Life Simulation</item>
         <item>Racing</item>
         <item>Sport</item>
@@ -76,7 +76,7 @@
         <item>PS4</item>
         <item>PSP</item>
         <item>PSVita</item>
-        <item>Xbox</item>
+        <item>XBOX</item>
         <item>XBOX360</item>
         <item>XBOXONE</item>
         <item>Wii-U</item>
@@ -85,6 +85,6 @@
         <item>GBA</item>
         <item>NES</item>
         <item>SNES</item>
-        <item>Dreamcast</item>
+        <item>Sega Dreamcast</item>
     </string-array>
 </resources>

@@ -16,6 +16,9 @@
         <meta-data
             android:name="AA_DB_VERSION"
             android:value="5" />
+        <meta-data
+            android:name="AA_MODELS"
+            android:value="com.izzan.gamingkiroku.model.GameItem" />
 
         <activity
             android:name=".MainActivity"
