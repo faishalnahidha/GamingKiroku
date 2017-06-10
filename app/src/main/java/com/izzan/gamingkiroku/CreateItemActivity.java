@@ -1,5 +1,9 @@
 package com.izzan.gamingkiroku;
 
+import android.content.Intent;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,7 +15,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.izzan.gamingkiroku.model.GameItem;
 
@@ -27,10 +31,14 @@ public class CreateItemActivity extends AppCompatActivity {
     private Button buttonSave;
     private ImageButton buttonCancel;
 
+    private CoordinatorLayout coordinatorLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_item);
+
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.createCoordinationLayout);
 
         editTextTitle = (EditText) findViewById(R.id.editTextTitle);
         actvGenre = (AutoCompleteTextView) findViewById(R.id.actvGenre);
@@ -60,7 +68,7 @@ public class CreateItemActivity extends AppCompatActivity {
             public void onDismiss() {
 
                 String[] subGenres;
-                String genre = actvGenre.getText().toString();
+                String genre = actvGenre.getText().toString().trim();
                 Log.d("GENRE", genre);
 
                 if (genre.equalsIgnoreCase("action")) {
@@ -68,7 +76,7 @@ public class CreateItemActivity extends AppCompatActivity {
                 } else if (genre.equalsIgnoreCase("adventure")) {
                     subGenres = getResources().getStringArray(R.array.adventure_sub_genre);
                 } else if (genre.equalsIgnoreCase("rpg") || genre.equalsIgnoreCase("role-playing")
-                        || genre.equalsIgnoreCase("role-playng / rpg")) {
+                        || genre.equalsIgnoreCase("role-playing / rpg")) {
                     subGenres = getResources().getStringArray(R.array.roleplaying_sub_genre);
                 } else if (genre.equalsIgnoreCase("simulation")) {
                     subGenres = getResources().getStringArray(R.array.simulation_sub_genre);
@@ -115,13 +123,23 @@ public class CreateItemActivity extends AppCompatActivity {
                 String titleInput = editTextTitle.getText().toString().trim();
 
                 if (titleInput.isEmpty() || titleInput.length() == 0 || titleInput.equals("")) {
-                    //EditText is empty
-                    Toast.makeText(getApplicationContext(),
-                            "Please input a game title", Toast.LENGTH_LONG).show();
+                    //editTextTitle is empty
+                    showSnackbar("Please input a game title.", Snackbar.LENGTH_SHORT);
                 } else {
-                    //EditText is not empty
-                    //saveGameItem();
-                    finish();
+                    //editTextTitle is not empty
+                    String genreInput = actvGenre.getText().toString().trim();
+
+                    if (genreInput.isEmpty() || genreInput.length() == 0 || genreInput.equals("")) {
+                        showSnackbar("Please input a genre.", Snackbar.LENGTH_SHORT);
+                    } else {
+                        saveGameItem();
+
+                        Intent returnIntent = new Intent();
+                        returnIntent.putExtra("NEW_GAME_TITLE", editTextTitle.getText().toString().trim());
+                        setResult(RESULT_OK, returnIntent);
+
+                        finish();
+                    }
                 }
 
             }
@@ -135,18 +153,32 @@ public class CreateItemActivity extends AppCompatActivity {
         actvSubGenre.setAdapter(adapterSubGenre);
     }
 
-    public void saveGameItem() {
-        String title = editTextTitle.getText().toString();
-        String genre = actvGenre.getText().toString();
-        String subGenre = actvSubGenre.getText().toString();
-        String platform = actvPlatform.getText().toString();
+    public long saveGameItem() {
+        String title = editTextTitle.getText().toString().trim();
+        String genre = actvGenre.getText().toString().trim();
+        String subGenre = actvSubGenre.getText().toString().trim();
+        String platform = actvPlatform.getText().toString().trim();
         boolean finished = checkBoxFinished.isChecked();
         float rating = ratingBar.getRating();
 
-        GameItem game = new GameItem(1, title, genre, subGenre, platform, finished, rating);
+        GameItem game = new GameItem(title, genre, subGenre, platform, finished, rating);
         game.save();
-        Toast.makeText(getApplicationContext(),
-                "Game is sucessfully saved", Toast.LENGTH_SHORT).show();
+
+        Log.i("NEW_GAME", "id = " + game.getId().toString()
+                + ", title = " + game.getTitle().trim());
+
+        return game.getId();
+    }
+
+    public void showSnackbar(String message, int duration) {
+        Snackbar snackbar = Snackbar.make(
+                coordinatorLayout, message, duration);
+
+        View snackbarView = snackbar.getView();
+        snackbarView.setBackgroundColor(
+                ContextCompat.getColor(getApplicationContext(), R.color.colorAccent2));
+
+        snackbar.show();
     }
 
 }

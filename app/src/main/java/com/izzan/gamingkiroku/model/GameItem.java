@@ -11,12 +11,13 @@ import java.util.List;
  * Created by Aizen on 7 Jun 2017.
  */
 
-@Table(name = "GameItems")
-public class GameItem extends Model{
+@Table(name = "game_items")
+public class GameItem extends Model {
 
-    // This is the unique id given by the server
-    @Column(name = "game_item_id", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
-    private long gameItemId;
+//    // This is the unique id given by the server
+//    @Column(name = "remote_id", unique = true,
+//            onUniqueConflict = Column.ConflictAction.REPLACE)
+//    private long remoteId;
 
     @Column(name = "title")
     private String title;
@@ -40,17 +41,17 @@ public class GameItem extends Model{
         super();
     }
 
-    public GameItem(long gameItemId, String title, String genre, String subGenre, String platform,
-    boolean finished, float rating) {
-        super();
-        this.gameItemId = gameItemId;
-        this.title = title;
-        this.genre = genre;
-        this.subGenre = subGenre;
-        this.platform = platform;
-        this.finished = finished;
-        this.rating = rating;
-    }
+//    public GameItem(long gameItemId, String title, String genre, String subGenre, String platform,
+//                    boolean finished, float rating) {
+//        super();
+//        this.remoteId = gameItemId;
+//        this.title = title;
+//        this.genre = genre;
+//        this.subGenre = subGenre;
+//        this.platform = platform;
+//        this.finished = finished;
+//        this.rating = rating;
+//    }
 
     public GameItem(String title, String genre, String subGenre, String platform,
                     boolean finished, float rating) {
@@ -63,13 +64,13 @@ public class GameItem extends Model{
         this.rating = rating;
     }
 
-    public long getGameItemId() {
-        return gameItemId;
-    }
-
-    public void setGameItemId(long gameItemId) {
-        this.gameItemId = gameItemId;
-    }
+//    public long getremoteId() {
+//        return remoteId;
+//    }
+//
+//    public void setGameItemId(long gameItemId) {
+//        this.remoteId = gameItemId;
+//    }
 
     public String getTitle() {
         return title;
@@ -123,7 +124,14 @@ public class GameItem extends Model{
         // This is how you execute a query
         return new Select()
                 .from(GameItem.class)
-                .orderBy("Name ASC")
+                .orderBy("title ASC")
                 .execute();
+    }
+
+    public static GameItem getRandom() {
+        return new Select()
+                .from(GameItem.class)
+                .orderBy("RANDOM()")
+                .executeSingle();
     }
 }

@@ -7,6 +7,8 @@
     <string name="label_finished">Finished</string>
     <string name="button_save">Save</string>
     <string name="game_title_hint">Game title...</string>
+    <string name="menu_view">View/Edit</string>
+    <string name="menu_delete">Delete</string>
 
     <string-array name="genre_list">
         <item>Action</item>

@@ -2,14 +2,36 @@ package com.izzan.gamingkiroku;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import com.izzan.gamingkiroku.adapter.GameItemAdapter;
+import com.izzan.gamingkiroku.model.GameItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    private List<GameItem> gameItemList = new ArrayList<>();
+
+    private RecyclerView recyclerView;
+    private GameItemAdapter mAdapter;
+
+    public static final int CREATE_REQUEST_CODE = 100;
+    CoordinatorLayout coordinatorLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,14 +40,69 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id
+                .mainCoordinationLayout);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent= new Intent(MainActivity.this, CreateItemActivity.class);
-                startActivity(intent);
+                Intent intent = new Intent(MainActivity.this, CreateItemActivity.class);
+                startActivityForResult(intent, CREATE_REQUEST_CODE);
+
+/*                Snackbar snackbar = Snackbar
+                        .make(coordinatorLayout, "Welcome to AndroidHive", Snackbar.LENGTH_LONG);
+                View snackbarView = snackbar.getView();
+                TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                textView.setTextColor(ContextCompat.getColor(
+                        getApplicationContext(), android.R.color.primary_text_light));
+                snackbarView.setBackgroundColor(
+                        ContextCompat.getColor(getApplicationContext(), R.color.colorAccent2));
+
+                snackbar.show();*/
             }
         });
+
+        mAdapter = new GameItemAdapter(gameItemList, getApplicationContext());
+
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerViewGameItem);
+        recyclerView.setHasFixedSize(false);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext()));
+        recyclerView.setAdapter(mAdapter);
+
+        registerForContextMenu(recyclerView);
+
+        reloadData();
+    }
+
+    private void reloadData() {
+        List<GameItem> ls = GameItem.getAll();
+        gameItemList.clear();
+        gameItemList.addAll(ls);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    private void deleteGameItem(GameItem gameItem) {
+        GameItem.delete(GameItem.class, gameItem.getId());
+        reloadData();
+    }
+
+    public void showSnackbar(String message, int duration){
+        Snackbar snackbar = Snackbar.make(
+                coordinatorLayout, message, duration);
+
+        View snackbarView = snackbar.getView();
+/*        TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(ContextCompat.getColor(
+                getApplicationContext(), android.R.color.primary_text_light));*/
+        snackbarView.setBackgroundColor(
+                ContextCompat.getColor(getApplicationContext(), R.color.colorAccent2));
+
+        snackbar.show();
     }
 
     @Override
@@ -48,5 +125,42 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        int position = -1;
+        try {
+            position = mAdapter.getPosition();
+
+        } catch (Exception e) {
+//            Log.d(TAG, e.getLocalizedMessage(), e);
+            return super.onContextItemSelected(item);
+        }
+
+        if (position != -1) {
+            GameItem gameItem = mAdapter.getItem(position);
+            switch (item.getItemId()) {
+                case 1:
+                    break;
+                case 2:
+                    deleteGameItem(gameItem);
+                    showSnackbar(gameItem.getTitle() + " has been deleted.", Snackbar.LENGTH_LONG);
+                    break;
+            }
+        }
+
+        return super.onContextItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CREATE_REQUEST_CODE && resultCode == RESULT_OK) {
+            String newGameTitle = data.getStringExtra("NEW_GAME_TITLE");
+            showSnackbar(newGameTitle + " has been successfully saved.", Snackbar.LENGTH_LONG);
+
+            reloadData();
+        }
     }
 }
