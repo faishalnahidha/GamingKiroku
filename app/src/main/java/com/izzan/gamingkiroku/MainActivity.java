@@ -1,11 +1,13 @@
 package com.izzan.gamingkiroku;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -92,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         reloadData();
     }
 
-    public void showSnackbar(String message, int duration){
+    public void showSnackbar(String message, int duration) {
         Snackbar snackbar = Snackbar.make(
                 coordinatorLayout, message, duration);
 
@@ -104,6 +106,35 @@ public class MainActivity extends AppCompatActivity {
                 ContextCompat.getColor(getApplicationContext(), R.color.colorAccent2));
 
         snackbar.show();
+    }
+
+    private void showAboutDialog() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+        //set title dialog
+        alertDialogBuilder.setTitle("About");
+
+        //set pesan dari dialog
+        alertDialogBuilder
+                .setMessage("Gaming Kiroku v1.0.0" +
+                        "\nCopyright \u00a9 2017 by Faishal Nahidha"
+                        + "\n\nPlease visit : " +
+                        "\n\t faishalnahidha.890.com" +
+                        "\n\t izzan.carbonmade.com " +
+                        "\n\t www.persona.my.id\n")
+                .setIcon(R.mipmap.ic_launcher)
+                .setCancelable(false)
+                .setPositiveButton("THANK YOU", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id){
+                        dialog.dismiss();
+                    }
+                });
+
+        //membuat alert dialog dari builder
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        //menampilkan alert dialog
+        alertDialog.show();
     }
 
     @Override
@@ -121,7 +152,8 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_about) {
+            showAboutDialog();
             return true;
         }
 
@@ -167,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
             reloadData();
         }
 
-        if(requestCode == VIEW_REQUEST_CODE){
+        if (requestCode == VIEW_REQUEST_CODE) {
             reloadData();
         }
     }

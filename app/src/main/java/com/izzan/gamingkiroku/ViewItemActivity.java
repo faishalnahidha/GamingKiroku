@@ -106,8 +106,14 @@ public class ViewItemActivity extends AppCompatActivity {
 
         if(mGameItem.isFinished()){
             textViewFinish.setText("Finished");
+            textViewFinish.setTextColor(ContextCompat.getColor(
+                    getApplicationContext(), android.R.color.secondary_text_dark));
+            textViewFinish.setTypeface(null, Typeface.NORMAL);
         } else {
             textViewFinish.setText("Unfinished");
+            textViewFinish.setTextColor(ContextCompat.getColor(
+                    getApplicationContext(), android.R.color.tertiary_text_dark));
+            textViewFinish.setTypeface(null, Typeface.ITALIC);
         }
 
         ratingBar.setRating(mGameItem.getRating());

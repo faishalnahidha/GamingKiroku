@@ -21,13 +21,21 @@
             android:value="com.izzan.gamingkiroku.model.GameItem" />
 
         <activity
+            android:name=".SplashActivity"
+            android:theme="@style/AppThemeDark"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppThemeDark">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
@@ -38,7 +46,9 @@
             android:theme="@style/AppThemeDark" />
         <activity
             android:name=".EditItemActivity"
-            android:theme="@style/AppThemeDark"/>
+            android:theme="@style/AppThemeDark" />
+
+
     </application>
 
 </manifest>
