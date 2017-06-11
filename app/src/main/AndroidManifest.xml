@@ -32,7 +32,13 @@
         </activity>
         <activity
             android:name=".CreateItemActivity"
-            android:theme="@style/AppThemeDark"></activity>
+            android:theme="@style/AppThemeDark" />
+        <activity
+            android:name=".ViewItemActivity"
+            android:theme="@style/AppThemeDark" />
+        <activity
+            android:name=".EditItemActivity"
+            android:theme="@style/AppThemeDark"/>
     </application>
 
 </manifest>

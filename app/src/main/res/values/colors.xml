@@ -6,6 +6,6 @@
     <color name="colorAccent">@color/colorPrimaryLight</color>
     <color name="colorAccent2">@color/colorPrimary</color>
     <color name="colorPopUp">#424242</color>
-    <color name="colorLineDivider">#0dffffff</color>
+    <color name="colorLineDivider">#1effffff</color>
     <color name="colorCustomToast">#bff44336</color>
 </resources>

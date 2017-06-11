@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private GameItemAdapter mAdapter;
 
     public static final int CREATE_REQUEST_CODE = 100;
+    public static final int VIEW_REQUEST_CODE = 200;
     CoordinatorLayout coordinatorLayout;
 
 
@@ -139,13 +140,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (position != -1) {
-            GameItem gameItem = mAdapter.getItem(position);
+            GameItem mGameItem = mAdapter.getItem(position);
             switch (item.getItemId()) {
                 case 1:
+                    Intent intent = new Intent(MainActivity.this, ViewItemActivity.class);
+                    intent.putExtra("GAME_ITEM_ID", mGameItem.getId());
+                    startActivityForResult(intent, VIEW_REQUEST_CODE);
                     break;
                 case 2:
-                    deleteGameItem(gameItem);
-                    showSnackbar(gameItem.getTitle() + " has been deleted.", Snackbar.LENGTH_LONG);
+                    deleteGameItem(mGameItem);
+                    showSnackbar(mGameItem.getTitle() + " has been deleted.", Snackbar.LENGTH_LONG);
                     break;
             }
         }
@@ -160,6 +164,10 @@ public class MainActivity extends AppCompatActivity {
             String newGameTitle = data.getStringExtra("NEW_GAME_TITLE");
             showSnackbar(newGameTitle + " has been successfully saved.", Snackbar.LENGTH_LONG);
 
+            reloadData();
+        }
+
+        if(requestCode == VIEW_REQUEST_CODE){
             reloadData();
         }
     }
