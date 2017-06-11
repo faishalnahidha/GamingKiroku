@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:maxLength="30"
+        android:maxLength="40"
         android:text="Game Title"
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="16sp"
@@ -59,7 +59,7 @@
         android:layout_marginBottom="1dp"
         android:layout_marginLeft="8dp"
         android:contentDescription="icon for finished status"
-        android:tint="@color/colorAccent2"
+        android:tint="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="@+id/textViewGameTitle"
         app:layout_constraintLeft_toRightOf="@+id/textViewGameTitle"
         app:srcCompat="@drawable/ic_check_circle_black_16dp" />

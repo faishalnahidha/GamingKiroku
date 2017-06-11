@@ -82,9 +82,9 @@ public class ViewItemActivity extends AppCompatActivity {
 
         if(!TextUtils.isEmpty(mGameItem.getSubGenre())){
             textViewSubGenre.setText(mGameItem.getSubGenre());
-            textViewPlatform.setTextColor(ContextCompat.getColor(
+            textViewSubGenre.setTextColor(ContextCompat.getColor(
                     getApplicationContext(), android.R.color.secondary_text_dark));
-            textViewPlatform.setTypeface(null, Typeface.NORMAL);
+            textViewSubGenre.setTypeface(null, Typeface.NORMAL);
         } else {
             textViewSubGenre.setText("no sub-genre");
             textViewSubGenre.setTextColor(ContextCompat.getColor(
@@ -107,7 +107,7 @@ public class ViewItemActivity extends AppCompatActivity {
         if(mGameItem.isFinished()){
             textViewFinish.setText("Finished");
         } else {
-            textViewFinish.setText("Not finished yet");
+            textViewFinish.setText("Unfinished");
         }
 
         ratingBar.setRating(mGameItem.getRating());
