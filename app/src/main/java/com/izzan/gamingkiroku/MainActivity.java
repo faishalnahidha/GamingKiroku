@@ -116,8 +116,8 @@ public class MainActivity extends AppCompatActivity {
 
         //set pesan dari dialog
         alertDialogBuilder
-                .setMessage("Gaming Kiroku v1.0.0" +
-                        "\nCopyright \u00a9 2017 by Faishal Nahidha"
+                .setMessage("Gaming Kiroku v1.0.1" +
+                        "\nCopyright \u00a9 2018 by Faishal Nahidha"
                         + "\n\nPlease visit : " +
                         "\n\t faishalnahidha.890.com" +
                         "\n\t izzan.carbonmade.com " +

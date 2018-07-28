@@ -59,6 +59,7 @@
                 android:textColor="?android:attr/textColorPrimary"
                 android:textColorHint="?android:attr/textColorPrimaryDisableOnly"
                 android:textCursorDrawable="@drawable/color_cursor"
+                android:imeOptions="actionDone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintLeft_toLeftOf="parent"
